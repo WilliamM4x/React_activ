@@ -1,17 +1,13 @@
-import InputSearchProps from "@/components/InputSearch/types";
-import { Feather } from "@expo/vector-icons";
-import { Pressable, TextInput, View } from "react-native";
+import { TextInput, View } from "react-native";
 import { styles } from "./styles";
+import InputLocProps from "./types";
 
-export default function InputSearch({
+export default function InputLoc({
     placeholder,
     value,
     onChangeText,
-    onClickClear,
-}: InputSearchProps){
-
-    const isClearVisible = value && value.length > 0;
-
+}: InputLocProps){
+    
     return(
         <View style={styles.container}>
             <TextInput
@@ -20,16 +16,6 @@ export default function InputSearch({
                 value={value}
                 onChangeText={onChangeText} 
             />
-
-            {isClearVisible && (
-                <Pressable 
-                    onPress={onClickClear}
-                    style={styles.clearButton}
-
-                >
-                    <Feather name="x-circle" size={20} color="gray" />
-                </Pressable>
-            )}
 
         </View>    
     )};

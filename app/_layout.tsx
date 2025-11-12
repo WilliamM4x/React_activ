@@ -14,7 +14,7 @@ export default function RootLayout() {
                 onPress={() => router.push('/favoritosPag')} 
                 style={{ marginRight: 15 }}
             >
-                <Feather name="list" size={24} color="white" />
+                <Feather name="list" size={24} color="blue" />
             </Pressable>
           ),
         }}

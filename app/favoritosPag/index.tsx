@@ -18,10 +18,8 @@ export default function Index(){
 
         const searchLower = searchText.toLowerCase();
         const listaFiltered = lista.filter(item => {
-            const title = (item.title || '').toLowerCase();
-            const description = (item.description || '').toLowerCase();
-
-            return title.includes(searchLower) || description.includes(searchLower);
+            const title = (item.title || '').toLowerCase();  
+            return title.includes(searchLower);
         });
 
         return listaFiltered
@@ -57,8 +55,9 @@ export default function Index(){
                     renderItem={({ item }) =>
                         <CardCustom
                             title={item.title}
-                            description={item.description}
-                            onClickCard={() => router.push(`/editPag?title=${item.title}&description=${item.description}`)}
+                            latitude={item.latitude}
+                            longitude={item.longitude}
+                            onClickCard={() => router.push(`/editPag?title=${item.title}&latitude=${item.latitude}&longitude=${item.longitude}`)}
                         />
                     }
                     ItemSeparatorComponent={() => <View style={{ height: 20 }} />}

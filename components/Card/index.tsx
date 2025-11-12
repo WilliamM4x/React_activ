@@ -6,7 +6,8 @@ import { CardProps } from './types';
 export default function CardCustom(
     {
     title, 
-    description,
+    latitude,
+    longitude,
     onClickCard,
     icon,
     }:CardProps){
@@ -19,7 +20,8 @@ export default function CardCustom(
         >
         <CardContainer>
            <Text>{title}</Text>
-           <Text>{description}</Text>
+           <Text>{latitude}</Text>
+           <Text>{longitude}</Text>
         </CardContainer>
 
         {icon && (
