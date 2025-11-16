@@ -1,36 +1,43 @@
+// app/favoritosPag/index.tsx
 import InputSearch from "@/components/InputSearch";
-import { getTodoList } from "@/services/get-todo";
 import { Task } from "@/services/interface";
-import { router } from "expo-router";
-import { useEffect, useMemo, useState } from "react";
+import { getLocations } from "@/services/save"; // Importe a função de LER
+import { router, useFocusEffect } from "expo-router"; // Importe 'useFocusEffect'
+import { useMemo, useState, useCallback } from "react"; // Importe 'useCallback'
 import { FlatList, Text, View } from "react-native";
 import { default as CardCustom } from "../../components/Card";
 
 
-export default function Index(){
-    //const [valor do estado, função que atualiza] = useState<type>(primeiro estdo);
-
+export default function Index() {
     const [searchText, setSearchText] = useState<string | null>(null);
-    const [lista, setLista] = useState<Task[]>([]);
+    const [lista, setLista] = useState<Task[]>([]); // Começa vazio
 
+    // Esta função será chamada toda vez que a tela entrar em foco
+    useFocusEffect(
+        useCallback(() => {
+            async function loadData() {
+                const locations = await getLocations();
+                setLista(locations);
+            }
+            loadData();
+        }, [])
+    );
+
+    // Lógica de filtro (continua igual)
     const todoListFiltered = useMemo(() => {
-        if (!searchText) return lista;
+        if (!searchText) return lista; // Agora 'lista' vem do AsyncStorage
 
         const searchLower = searchText.toLowerCase();
+        // Ajuste no filtro para buscar apenas pelo título
         const listaFiltered = lista.filter(item => {
             const title = (item.title || '').toLowerCase();
-            const description = (item.description || '').toLowerCase();
-
-            return title.includes(searchLower) || description.includes(searchLower);
+            return title.includes(searchLower);
         });
 
         return listaFiltered
     }, [searchText, lista]);
 
-    useEffect(()=>{
-        const todos = getTodoList();
-        setLista(todos);
-    }, []);
+    // O useEffect que chamava getTodoList() foi removido
 
     return (
         <View style={{
@@ -41,32 +48,29 @@ export default function Index(){
         }}>
 
             <InputSearch
-                onChangeText={(todos) => setSearchText(todos)}
+                onChangeText={(text) => setSearchText(text)}
                 placeholder="Buscar tarefas"
-                value={searchText || ""} 
+                value={searchText || ""}
                 onClickClear={() => setSearchText("")}
             />
 
-            <View style={{
-                flex: 1,
-            }}
-            > 
+            <View style={{ flex: 1 }}>
                 <FlatList
                     style={{ flex: 1 }}
                     data={todoListFiltered}
                     renderItem={({ item }) =>
                         <CardCustom
                             title={item.title}
-                            description={item.description}
-                            onClickCard={() => router.push(`/editPag?title=${item.title}&description=${item.description}`)}
+                            latitude={item.latitude}
+                            longitude={item.longitude}
+                            onClickCard={() => router.push(`/editPag?title=${item.title}&latitude=${item.latitude}&longitude=${item.longitude}`)}
                         />
                     }
                     ItemSeparatorComponent={() => <View style={{ height: 20 }} />}
-                    
                     ListEmptyComponent={
                         <View style={{ alignItems: 'center', marginTop: 50 }}>
                             <Text style={{ fontSize: 16, color: '#666' }}>
-                                Nenhum item encontrado.
+                                Nenhum item salvo.
                             </Text>
                         </View>
                     }

@@ -3,7 +3,8 @@ import {MaterialIcons} from "@expo/vector-icons"
 
 export interface CardProps {
     title: string;
-    description: string;
+    latitude: string;
+    longitude: string;
     onClickCard: () => void;
     icon?: {
         name: ComponentProps <typeof MaterialIcons>['name'],

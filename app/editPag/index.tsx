@@ -16,8 +16,8 @@ export default function Index(){
         }}> 
             <View>
                   <Text>Página de edição de localização</Text>
-                  <ButtonCustom title="Salvar"/>
-                  <ButtonCustom title="Deletar"/>
+                 {/* <ButtonCustom title="Salvar"/>
+                  <ButtonCustom title="Deletar"/> */}
             </View>
         
         </View>
