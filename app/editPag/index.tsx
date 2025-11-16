@@ -5,8 +5,8 @@ import { Text, View } from "react-native";
 
 export default function Index(){
  
-    const {title, description} = useLocalSearchParams();
-    console.log(title, description)
+    const {title, latitude,longitude} = useLocalSearchParams();
+    console.log(title, latitude,longitude,)
 
     return (
             <View style={{
