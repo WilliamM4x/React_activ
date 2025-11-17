@@ -8,7 +8,10 @@ export default function RootLayout() {
     <Stack.Screen
         name="index"
         options={{
-          title: "Mapa", 
+          title: "Mapa",
+          headerStyle:{
+            backgroundColor: '#2f8eb9',
+          }, 
           headerRight: () => (
             <Pressable 
                 onPress={() => router.push('/favoritosPag')} 

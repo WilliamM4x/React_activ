@@ -3,7 +3,7 @@ import InputSearch from "@/components/InputSearch";
 import { Task } from "@/services/interface";
 import { getLocations } from "@/services/save"; // Importe a função de LER
 import { router, useFocusEffect } from "expo-router"; // Importe 'useFocusEffect'
-import { useMemo, useState, useCallback } from "react"; // Importe 'useCallback'
+import { useCallback, useMemo, useState } from "react"; // Importe 'useCallback'
 import { FlatList, Text, View } from "react-native";
 import { default as CardCustom } from "../../components/Card";
 
@@ -49,7 +49,7 @@ export default function Index() {
 
             <InputSearch
                 onChangeText={(text) => setSearchText(text)}
-                placeholder="Buscar tarefas"
+                placeholder="Buscar local"
                 value={searchText || ""}
                 onClickClear={() => setSearchText("")}
             />
@@ -63,7 +63,15 @@ export default function Index() {
                             title={item.title}
                             latitude={item.latitude}
                             longitude={item.longitude}
-                            onClickCard={() => router.push(`/editPag?title=${item.title}&latitude=${item.latitude}&longitude=${item.longitude}`)}
+                           onClickCard={() => {
+                                const params = new URLSearchParams({
+                                    id: item.id,
+                                    title: item.title,
+                                    latitude: item.latitude,
+                                    longitude: item.longitude,
+                                });
+                                router.push(`/editPag?${params.toString()}`);
+                            }}
                         />
                     }
                     ItemSeparatorComponent={() => <View style={{ height: 20 }} />}

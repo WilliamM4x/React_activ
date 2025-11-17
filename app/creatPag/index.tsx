@@ -7,7 +7,7 @@ import { useState } from "react";
 import { Alert, View } from "react-native";
 
 export default function Index() {
-    // Estados para os inputs
+
     const [lugar, setLugar] = useState<string> ('');
     const [longitude, setLongitude] = useState<string>('');
     const [latitude, setLatitude] = useState<string>('');
@@ -41,7 +41,7 @@ export default function Index() {
             flex: 1,
             paddingHorizontal: 16,
             paddingVertical: 10,
-            gap: 20 // Espaçamento
+            gap: 20 
         }}>
             <InputLoc
                 placeholder='Nome do local'

@@ -8,6 +8,9 @@ export default function RootLayout() {
         name="index"
         options={{
           title: "Meus Favoritos",
+          headerStyle:{
+            backgroundColor: '#2f8eb9',
+          }, 
            headerRight: () => (
             <Pressable 
                 onPress={() => router.push('/')} 

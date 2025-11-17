@@ -8,6 +8,9 @@ export default function RootLayout() {
         name="index"
         options={{
           title: "Crie a localização", 
+          headerStyle:{
+            backgroundColor: '#2f8eb9',
+          }, 
            headerRight: () => (
             <Pressable 
                 onPress={() => router.push('/')} 
