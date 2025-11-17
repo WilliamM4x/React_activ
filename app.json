@@ -12,12 +12,21 @@
       "supportsTablet": true
     },
     "android": {
+      "config": {
+        "googleMaps":{
+         "apiKey": "process.env.apiKey",
+        },     
+      },
+      "permissions": [
+        "android.permission.ACCESS_FINE_LOCATION"
+      ],
       "adaptiveIcon": {
         "backgroundColor": "#FFFFFF",
         "foregroundImage": "./assets/images/android-icon-foreground.png"
       },
       "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "package": "com.williamm4x.myapp"
     },
     "web": {
       "output": "static",
@@ -41,6 +50,12 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "99bf90d8-fce0-4661-966a-9bd105c65dbd"
+      }
     }
   }
 }
